@@ -1,9 +1,17 @@
-<mat-form-field>
-    <mat-label>project name</mat-label>
-    <input matInput>
-</mat-form-field>
+<form  class="form" [formGroup]="project" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+      <mat-label>project name</mat-label>
+      <input  id="name" required  matInput formControlName="name">
+  </mat-form-field>
 
-<mat-form-field>
-    <mat-label>description</mat-label>
-    <textarea matInput></textarea>
-</mat-form-field>
+  <mat-form-field>
+      <mat-label>description</mat-label>
+      <textarea matInput></textarea>
+  </mat-form-field>
+
+  <button [disabled]="project.invalid" mat-button mat-dialog-close type="submit">Submit</button>
+
+  <mat-error *ngIf="project.invalid">
+    Fill in the required fields
+  </mat-error>
+</form>

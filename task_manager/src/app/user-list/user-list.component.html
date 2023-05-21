@@ -1,1 +1,43 @@
-<p>user-list works!</p>
+<form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>User FirsName</mat-label>
+    <input matInput formControlName="firstName">
+  </mat-form-field> 
+  
+  <mat-form-field>
+    <mat-label>User LastName</mat-label>
+    <input matInput formControlName="lastName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>password</mat-label>
+    <input matInput formControlName="password">
+  </mat-form-field>
+
+  <button [disabled]="userForm.invalid" mat-button mat-dialog-close type="submit">Submit</button>
+
+</form>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>fullName</th>
+        <th *ngFor="let permision of permisions">{{permision.permision}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td (click)="onUser(user)">{{ user.firstName + " " + user.lastName }}</td>
+        <td *ngFor="let permision of user.permisions">
+          <mat-checkbox [(ngModel)]="permision.isActive"
+                        (ngModelChange)="updateAllComplete(user)">
+          </mat-checkbox>
+        </td>
+      </tr>
+    </tbody>
+</table>
