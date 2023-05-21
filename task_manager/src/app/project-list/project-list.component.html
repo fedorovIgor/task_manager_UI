@@ -1,1 +1,9 @@
-<p>project-list works!</p>
+<button mat-raised-button (click)="openDialog()">Create new project</button>
+<mat-list>
+  <mat-list-item *ngFor="let project of projects" (click)="onProject(project)">
+    <span matListItemTitle> {{ project.name }} </span>
+    <span matListItemLine>{{ project.description }}</span>
+    <span matListItemLine>{{ project.status }}</span>
+    <span matListItemLine>{{ project.startData }}</span>
+  </mat-list-item>
+</mat-list>
