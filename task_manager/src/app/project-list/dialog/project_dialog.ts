@@ -1,7 +1,7 @@
 import {Dialog, DialogRef, DIALOG_DATA} from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Project } from "src/app/model/project";
+import { Project } from "src/app/model/project/project";
 
 @Component({
     selector: 'app-project-list-dialog',

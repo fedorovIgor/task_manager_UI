@@ -16,13 +16,18 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ProjectInfoComponent } from './project-info/project-info.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectListComponent,
     UserListComponent,
-    ProjectDialog
+    ProjectDialog,
+    ProjectInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

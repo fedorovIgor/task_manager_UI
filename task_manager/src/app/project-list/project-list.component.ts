@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../model/project';
+import { Project } from '../model/project/project';
 import { ProjectService } from '../project.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ProjectDialog } from './dialog/project_dialog';

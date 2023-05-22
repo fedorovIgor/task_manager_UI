@@ -1,0 +1,43 @@
+
+<mat-tab-group animationDuration="400ms">
+    <mat-tab label="History Of Complited Tasks">
+        <mat-card *ngFor="let task of $any(getOldTasks)">
+            <mat-card-header>
+                <mat-card-subtitle>{{task.startData}} - {{task.finishData}}</mat-card-subtitle>
+                <mat-card-title>{{task.header}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
+                <p>{{ task.description }}</p>
+                <mat-divider></mat-divider>
+                <p>{{task.linkInfo}}</p>
+            </mat-card-content>            
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab label="Active Task">
+        <mat-card *ngFor="let task of $any(getCurrentTasks)">
+            <mat-card-header>
+                <mat-card-subtitle>{{task.startData}}</mat-card-subtitle>
+                <mat-card-title>{{task.header}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
+                <p>{{ task.description }}</p>
+                <mat-divider></mat-divider>
+                <p>{{task.linkInfo}}</p>
+            </mat-card-content>            
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab label="Not Active Tasks">
+        <mat-card *ngFor="let task of $any(getUnactiveTasks)">
+            <mat-card-header>
+                <mat-card-title>{{task.header}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{ task.description }}</p>
+            </mat-card-content>            
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>
