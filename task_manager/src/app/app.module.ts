@@ -21,6 +21,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 
+import { OAuthModule } from 'angular-oauth2-oidc';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,15 @@ import {MatCardModule} from '@angular/material/card';
     ReactiveFormsModule,
     MatCheckboxModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    
+    
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['http://192.168.1.100:8085'],
+        sendAccessToken: true
+    }
+  })
   ],
   providers: [],
   bootstrap: [AppComponent]

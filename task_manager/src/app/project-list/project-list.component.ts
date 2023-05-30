@@ -11,16 +11,13 @@ import { ProjectDialog } from './dialog/project_dialog';
 })
 export class ProjectListComponent implements OnInit {
 
-  projects !: Project[];
+  projects : Project[] = [];
   newProject: Project =  {
     id: 0,
     name: "",
     description: "",
-    startData: new Date,
-    status: {
-      id: 0,
-      status: "NEW"
-    }
+    startDate: new Date,
+    status: 'ACTIVE'
   };
 
   constructor(private projectSevice: ProjectService,
@@ -28,7 +25,7 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectSevice.getProjects()
-      .subscribe(projects => this.projects = projects);
+      .subscribe((p: Project) => this.projects.push(p))
   }
 
   openDialog(): void {

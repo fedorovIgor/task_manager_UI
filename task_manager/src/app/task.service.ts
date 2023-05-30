@@ -1,23 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Project } from './model/project/project';
 import { Observable } from 'rxjs';
+import { Task } from './model/task/task';
+import { Project } from './model/project/project';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
-
-  hostLink: string = "http://192.168.1.100:8085/"
+export class TaskService {
 
   constructor(private http: HttpClient) { }
+
+  hostLink: string = "http://192.168.1.100:8085/";
+
   
-  getProjects() : Observable<Project> {
+  getTasksByProjectId(projectId: number): Observable<Task> {
 
-    var url = this.hostLink + "api/v1/project"
+    let url = this.hostLink + 'api/v1/project/' + projectId + "/task";
 
-    return new Observable<Project>((observer) => {
+    return new Observable<Task>((observer) => {
 
       var eventSourceConnection = new EventSourcePolyfill(url, {
           headers: {
@@ -36,12 +38,15 @@ export class ProjectService {
         console.debug('Received event: ', event);
           let json = JSON.parse(event.data);
 
-          observer.next(  {
+          observer.next( {
             id: json['id'],
-            name: json['name'],
+            header: json['header'],
             description: json['description'],
-            startDate: json['startDate'],
-            status: json['status']
+            linkInfo: json['linkInfo'],
+            status: json['status'],
+            startData: json['startData'],
+            finishData: json['finishData'],
+            user: json['user']
           })
       }
 
@@ -50,16 +55,5 @@ export class ProjectService {
         eventSourceConnection.close()
       }
     })
-  }
-
-
-  getProjectById(id: number): Observable<Project> {
-    
-    var url = this.hostLink + "api/v1/project/" + id
-    return this.http.get<Project>(url) 
-  }
-  
-  createProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.hostLink + "api/v1/project", project) 
   }
 }
