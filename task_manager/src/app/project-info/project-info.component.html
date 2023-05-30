@@ -1,13 +1,14 @@
-
-<mat-tab-group animationDuration="400ms">
+<mat-tab-group animationDuration="300ms">
     <mat-tab label="History Of Complited Tasks">
-        <mat-card *ngFor="let task of $any(getOldTasks)">
+        <mat-card *ngFor="let task of getOldTasks()">
             <mat-card-header>
                 <mat-card-subtitle>{{task.startData}} - {{task.finishData}}</mat-card-subtitle>
                 <mat-card-title>{{task.header}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
+                <div *ngIf="task.user != null">
+                    <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
+                </div>
                 <p>{{ task.description }}</p>
                 <mat-divider></mat-divider>
                 <p>{{task.linkInfo}}</p>
@@ -16,14 +17,16 @@
     </mat-tab>
 
     <mat-tab label="Active Task">
-        <mat-card *ngFor="let task of $any(getCurrentTasks)">
+        <mat-card *ngFor="let task of getCurrentTasks()">
             <mat-card-header>
                 <mat-card-subtitle>{{task.startData}}</mat-card-subtitle>
                 <mat-card-title>{{task.header}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
-                <p>{{ task.description }}</p>
+                <div *ngIf="task.user != null">
+                    <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
+                </div>
+                <p>{{ task.description }}dawdawdawd</p>
                 <mat-divider></mat-divider>
                 <p>{{task.linkInfo}}</p>
             </mat-card-content>            
@@ -31,7 +34,7 @@
     </mat-tab>
 
     <mat-tab label="Not Active Tasks">
-        <mat-card *ngFor="let task of $any(getUnactiveTasks)">
+        <mat-card *ngFor="let task of getUnactiveTasks()">
             <mat-card-header>
                 <mat-card-title>{{task.header}}</mat-card-title>
             </mat-card-header>
@@ -41,3 +44,4 @@
         </mat-card>
     </mat-tab>
 </mat-tab-group>
+

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
-import { ProjectInfo } from '../model/project/project_info';
 import { FormControl } from '@angular/forms';
 import { Task } from '../model/task/task';
+import { TaskService } from '../task.service';
+import { Project } from '../model/project/project';
 
 @Component({
   selector: 'app-project-info',
@@ -11,35 +12,44 @@ import { Task } from '../model/task/task';
 })
 export class ProjectInfoComponent implements OnInit {
 
-  projectInfo: ProjectInfo = {
+  projectInfo: Project = {
     id: 0,
-    fullDescription: '',
+    description: '',
     name: '',
-    tasks: []
+    startDate: new Date(),
+    status: ''
   }
+  
+  taskToCreate!: Task
+
+  tasks: Task[] = []
 
   taskRepresanted = new FormControl('')
 
-  constructor(private projectSevice: ProjectService){}
+  constructor(private projectSevice: ProjectService,
+    private taskService: TaskService){}
 
   ngOnInit(): void {
-    this.projectSevice.getProjectInfo(0)
-      .subscribe(p => this.projectInfo = p)
+    this.projectSevice.getProjectById(2)
+      .subscribe(p => {
+        this.projectInfo = p
+        console.log(p)
+      })
+
+    this.taskService.getTasksByProjectId(2)
+      .subscribe(t => this.tasks.push(t))
+
   }
 
   getOldTasks(): Task[] {
-    var tasks = this.projectInfo.tasks.filter(t => t.status == 'COMPLITED')
-    console.log(tasks)
-    return tasks;
+    return this.tasks.filter(t => t.status == 'COMPLITE')
   }
 
   getCurrentTasks(): Task[] {
-    return this.projectInfo.tasks
-      .filter(f => f.status == 'CURRENT')
-  } 
-  
+    return this.tasks.filter(t => t.status == 'STARTED')
+  }
+
   getUnactiveTasks(): Task[] {
-    return this.projectInfo.tasks
-      .filter(f => f.status == 'UNACTIVE')
+    return this.tasks.filter(t => t.status == 'UNACTIVE')
   }
 }

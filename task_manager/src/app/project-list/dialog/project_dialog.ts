@@ -33,11 +33,8 @@ import { Project } from "src/app/model/project/project";
         "id": 0,
         "name": this.project.value.name,
         "description": this.project.value.description,
-        "startData": new Date,
-        "status": {
-          "id" : 0,
-          "status": "ACTIVE"
-        }
+        "startDate": new Date,
+        "status": 'ACTIVE'
       }
   
       console.log(this.project)

@@ -6,7 +6,7 @@
 
   <mat-form-field>
       <mat-label>description</mat-label>
-      <textarea matInput></textarea>
+      <textarea id="description"  matInput formControlName="description"></textarea>
   </mat-form-field>
 
   <button [disabled]="project.invalid" mat-button mat-dialog-close type="submit">Submit</button>
