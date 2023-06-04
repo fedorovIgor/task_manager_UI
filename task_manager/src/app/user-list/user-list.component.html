@@ -19,20 +19,12 @@
     <input matInput formControlName="password">
   </mat-form-field>
 
-  <button [disabled]="userForm.invalid" mat-button mat-dialog-close type="submit">Submit</button>
+  <button [disabled]="userForm.invalid" mat-button mat-dialog-close type="submit">Create</button>
 
 </form>
 
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>fullName</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td (click)="onUser(user)">{{ user.firstName + " " + user.lastName }}</td>
-       
-      </tr>
-    </tbody>
-</table>
+<mat-list>
+  <mat-list-item *ngFor="let user of users" (click)="onUser(user)">
+    <span matListItemTitle> {{ user.firstName }} {{user.lastName}} {{user.email}} {{user.role}}</span>
+  </mat-list-item>
+</mat-list>

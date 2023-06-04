@@ -1,4 +1,19 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/user" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <span>Users</span>
+    </button>
+    <button mat-menu-item routerLink="/project" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <span>Projects</span>
+    </button>
+</mat-menu>
+
 <button *ngIf="!token" mat-button (click)="login()">login</button>
 <button *ngIf="token" mat-button (click)="logout()">logout</button>
+ 
+<div>
+    <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>

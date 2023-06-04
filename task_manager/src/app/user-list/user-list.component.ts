@@ -26,6 +26,13 @@ export class UserListComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     })
 
+    this.updateUsers()
+  }
+
+  updateUsers() {
+    this.users = []
+    this.role = []
+
     this.userSevice.getUsers()
       .subscribe(user => this.users.push(user));
     this.userSevice.getPermisions()
@@ -34,11 +41,12 @@ export class UserListComponent implements OnInit {
   
   updateAllComplete(user: User) {
     this.userSevice.updateUserPermisions(user)
-      .subscribe(u => console.log(u))
+      .subscribe(u => this.updateUsers())
   }
 
   onUser(user:User) {
     console.log(user)
+
   }
 
   onSubmit() {
@@ -53,5 +61,9 @@ export class UserListComponent implements OnInit {
     }
 
     console.log(user)
+    this.userSevice.createUser(user)
+    .subscribe(u => {
+        this.updateUsers()
+    })
   }
 }
