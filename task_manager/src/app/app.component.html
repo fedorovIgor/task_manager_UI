@@ -1,5 +1,4 @@
 <button *ngIf="!token" mat-button (click)="login()">login</button>
 <button *ngIf="token" mat-button (click)="logout()">logout</button>
 
-<app-project-list></app-project-list>
-<app-project-info></app-project-info>
+<router-outlet></router-outlet>

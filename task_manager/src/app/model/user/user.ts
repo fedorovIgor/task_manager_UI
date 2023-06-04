@@ -1,4 +1,3 @@
-import { Permision } from "./permision"
 
 export interface User {
     id: number
@@ -6,5 +5,6 @@ export interface User {
     lastName: string
     email: string
     password: string
-    permisions: Permision[]
+    keycloakId: string
+    role: string[]
 }

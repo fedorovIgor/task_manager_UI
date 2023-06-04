@@ -20,8 +20,10 @@ import { ProjectInfoComponent } from './project-info/project-info.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { TaskCreate } from './project-info/task-create/task-create';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     ProjectListComponent,
     UserListComponent,
     ProjectDialog,
-    ProjectInfoComponent
+    ProjectInfoComponent,
+    TaskCreate
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     MatCheckboxModule,
     MatTabsModule,
     MatCardModule,
+    MatIconModule,
     
     
     OAuthModule.forRoot({

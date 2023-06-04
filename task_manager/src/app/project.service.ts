@@ -56,7 +56,31 @@ export class ProjectService {
   getProjectById(id: number): Observable<Project> {
     
     var url = this.hostLink + "api/v1/project/" + id
-    return this.http.get<Project>(url) 
+    return new Observable<Project>((observer) => {
+
+      var eventSourceConnection = new EventSourcePolyfill(url, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+      })
+
+      eventSourceConnection.onmessage = (event: any) => {
+        console.debug('Received event: ', event);
+          let json = JSON.parse(event.data);
+
+          observer.next(  {
+            id: json['id'],
+            name: json['name'],
+            description: json['description'],
+            startDate: json['startDate'],
+            status: json['status']
+          })
+      }
+      eventSourceConnection.onerror = (err: any) => {
+        console.log( "[TempORealService.eventSourceConnection.onerror] error:", err)
+        eventSourceConnection.close()
+      }
+    })
   }
   
   createProject(project: Project): Observable<Project> {
