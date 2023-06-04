@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from './model/task/task';
@@ -46,7 +46,9 @@ export class TaskService {
             status: json['status'],
             startData: json['startData'],
             finishData: json['finishData'],
-            user: json['user']
+            userKeycloakId: json['userKeycloakId'],
+            userName: json['userName'],
+            userEmail: json['userEmail']
           })
       }
 
@@ -55,5 +57,31 @@ export class TaskService {
         eventSourceConnection.close()
       }
     })
+  }
+
+  
+  updateTask(task: Task): Observable<Task> {
+
+    let url = this.hostLink + 'api/v1/task';
+
+    return this.http.put<Task>(url, task);
+  }
+
+
+  createTask(task: Task, projectId: number): Observable<any> {
+
+    let url = this.hostLink + 'api/v1/project/' + projectId + '/task';
+
+    return this.http.post(url, task,{ responseType: 'text'});
+  }
+
+  updateToWork(task: Task):Observable<any> {
+    let url = this.hostLink + 'api/v1/task/work'
+    return this.http.put(url, task, { responseType: 'text'})
+  }
+  
+  updateToClose(task: Task):Observable<any> {
+    let url = this.hostLink + 'api/v1/task/close'
+    return this.http.put(url, task, { responseType: 'text'})
   }
 }

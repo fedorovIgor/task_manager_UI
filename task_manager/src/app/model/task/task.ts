@@ -7,7 +7,9 @@ export interface Task {
     description: string 
     linkInfo: string
     status: string
-    startData: Data
-    finishData: Data
-    user: User
+    startData?: Date
+    finishData?: Date
+    userKeycloakId: string
+    userName?: string
+    userEmail?: string
 }

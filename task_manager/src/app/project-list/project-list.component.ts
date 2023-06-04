@@ -3,6 +3,7 @@ import { Project } from '../model/project/project';
 import { ProjectService } from '../project.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ProjectDialog } from './dialog/project_dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -21,6 +22,7 @@ export class ProjectListComponent implements OnInit {
   };
 
   constructor(private projectSevice: ProjectService,
+    private router: Router,
     public dialog: Dialog) {}
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class ProjectListComponent implements OnInit {
 
   onProject(project: Project) {
     console.log("click on project id " + project.id)
+    this.router.navigateByUrl("/project/" + project.id)
   }
 
   createProject(project: Project) {

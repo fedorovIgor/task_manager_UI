@@ -1,35 +1,52 @@
+<h1>{{projectInfo.name}}</h1>
+
+<div> 
+    <h2>Add Task 
+        <button (click)="onAddTask()" mat-mini-fab color="primary">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+    </h2>
+</div>
+
+
+
+<div class="example-button-container">
+    {{projectInfo.description}}
+</div>
+
+
 <mat-tab-group animationDuration="300ms">
     <mat-tab label="History Of Complited Tasks">
         <mat-card *ngFor="let task of getOldTasks()">
             <mat-card-header>
-                <mat-card-subtitle>{{task.startData}} - {{task.finishData}}</mat-card-subtitle>
-                <mat-card-title>{{task.header}}</mat-card-title>
+                <mat-card-subtitle>start date {{task.startData | date:'shortDate'}}</mat-card-subtitle>
+                <mat-card-subtitle>finish date {{task.finishData | date:'shortDate'}}</mat-card-subtitle>
+                <mat-card-title>{{task.header}} - {{task.userName}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div *ngIf="task.user != null">
-                    <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
-                </div>
                 <p>{{ task.description }}</p>
-                <mat-divider></mat-divider>
+                
                 <p>{{task.linkInfo}}</p>
+                <mat-divider></mat-divider>
             </mat-card-content>            
         </mat-card>
     </mat-tab>
 
     <mat-tab label="Active Task">
         <mat-card *ngFor="let task of getCurrentTasks()">
-            <mat-card-header>
-                <mat-card-subtitle>{{task.startData}}</mat-card-subtitle>
-                <mat-card-title>{{task.header}}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div *ngIf="task.user != null">
-                    <p>user - {{task.user.firstName}} {{task.user.lastName}} </p>
-                </div>
-                <p>{{ task.description }}dawdawdawd</p>
-                <mat-divider></mat-divider>
-                <p>{{task.linkInfo}}</p>
-            </mat-card-content>            
+            <div (click)="onChangeTask(task)">
+                <mat-card-header>
+                    <mat-card-subtitle>{{task.startData}}</mat-card-subtitle>
+                    <mat-card-title>{{task.header}} - {{task.userName}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{ task.description }}</p>        
+                    <p>{{task.linkInfo}}</p>
+                    <button mat-raised-button (click)="onClose(task)">Close Task</button>
+                    <mat-divider></mat-divider>
+                </mat-card-content> 
+            </div>
+                       
         </mat-card>
     </mat-tab>
 
@@ -40,6 +57,7 @@
             </mat-card-header>
             <mat-card-content>
                 <p>{{ task.description }}</p>
+                <button mat-raised-button (click)="onTakeOn(task)">Take On</button>
             </mat-card-content>            
         </mat-card>
     </mat-tab>

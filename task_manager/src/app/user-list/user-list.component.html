@@ -27,17 +27,12 @@
     <thead>
       <tr>
         <th>fullName</th>
-        <th *ngFor="let permision of permisions">{{permision.permision}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
         <td (click)="onUser(user)">{{ user.firstName + " " + user.lastName }}</td>
-        <td *ngFor="let permision of user.permisions">
-          <mat-checkbox [(ngModel)]="permision.isActive"
-                        (ngModelChange)="updateAllComplete(user)">
-          </mat-checkbox>
-        </td>
+       
       </tr>
     </tbody>
 </table>
