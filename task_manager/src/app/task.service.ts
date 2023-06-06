@@ -59,6 +59,48 @@ export class TaskService {
     })
   }
 
+  getUserTask() {
+    let url = this.hostLink + 'api/v1/user/task'
+    return new Observable<Task>((observer) => {
+
+      var eventSourceConnection = new EventSourcePolyfill(url, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        }
+      )
+
+      eventSourceConnection.onopen = () => {
+        console.log(
+          "[RealtimeService.onOpenConnection] SSE connection established!"
+        )
+      }
+
+      eventSourceConnection.onmessage = (event: any) => {
+        console.debug('Received event: ', event);
+          let json = JSON.parse(event.data);
+
+          observer.next( {
+            id: json['id'],
+            header: json['header'],
+            description: json['description'],
+            linkInfo: json['linkInfo'],
+            status: json['status'],
+            startData: json['startData'],
+            finishData: json['finishData'],
+            userKeycloakId: json['userKeycloakId'],
+            userName: json['userName'],
+            userEmail: json['userEmail']
+          })
+      }
+
+      eventSourceConnection.onerror = (err: any) => {
+        console.log( "[TempORealService.eventSourceConnection.onerror] error:", err)
+        eventSourceConnection.close()
+      }
+    })
+  }
+
   
   updateTask(task: Task): Observable<Task> {
 

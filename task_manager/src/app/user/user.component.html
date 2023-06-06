@@ -1,0 +1,18 @@
+<h2>{{user.firstName}} {{user.lastName}}</h2>
+<h2>{{user.email}}</h2>
+<div>
+    <h3>Tasks:</h3>
+    <mat-card *ngFor="let task of userTasks" >
+        <mat-card-header>
+            <mat-card-subtitle>start date {{task.startData | date:'shortDate'}}</mat-card-subtitle>
+            <mat-card-subtitle>finish date {{task.finishData | date:'shortDate'}}</mat-card-subtitle>
+            <mat-card-title>{{task.header}} - {{task.status}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ task.description }}</p>
+            
+            <p>{{task.linkInfo}}</p>
+            <mat-divider></mat-divider>
+        </mat-card-content>            
+    </mat-card>
+</div>
