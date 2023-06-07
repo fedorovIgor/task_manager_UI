@@ -25,6 +25,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { TaskCreate } from './project-info/task-create/task-create';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TaskCreate } from './project-info/task-create/task-create';
     UserListComponent,
     ProjectDialog,
     ProjectInfoComponent,
-    TaskCreate
+    TaskCreate,
+    UserComponent
   ],
   imports: [
     BrowserModule,

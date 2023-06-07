@@ -12,6 +12,7 @@
 
 <button *ngIf="!token" mat-button (click)="login()">login</button>
 <button *ngIf="token" mat-button (click)="logout()">logout</button>
+<button mat-button routerLink="/info" routerLinkActive="active" ariaCurrentWhenActive="page">Personal Info</button>
  
 <div>
     <router-outlet></router-outlet>

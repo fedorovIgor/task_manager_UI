@@ -48,6 +48,39 @@ export class UserService {
     })
   }
 
+  getUserInfo() {
+    let url = this.hostLink + "api/v1/user/info";
+
+    return new Observable<User>((observer) => {
+
+      var eventSourceConnection = new EventSourcePolyfill(url, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        }
+      )
+
+      eventSourceConnection.onmessage = (event: any) => {
+        console.debug('Received event: ', event);
+          let json = JSON.parse(event.data);
+
+          observer.next( {
+            id: json['id'],
+            firstName: json['firstName'],
+            lastName: json['lastName'],
+            email: json['email'],
+            password: json['password'],
+            role: json['role'],
+            keycloakId: json['keycloakId']
+          })
+      }
+      eventSourceConnection.onerror = (err: any) => {
+        console.log( "[TempORealService.eventSourceConnection.onerror] error:", err)
+        eventSourceConnection.close()
+      }
+    })
+  }
+
   getPermisions(): Observable<string> {
     
     let url = this.hostLink + "api/v1/user/role";
