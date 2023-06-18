@@ -2,7 +2,7 @@ import { AuthConfig } from 'angular-oauth2-oidc';
 
 export const authCodeFlowConfig: AuthConfig = {
   // Url of the Identity Provider
-  issuer: 'http://192.168.1.100:28080/auth/realms/task_manager',
+  issuer: 'http://localhost:28080/auth/realms/task_manager',
 
   // URL of the SPA to redirect the user to after login
   redirectUri: 'http://localhost:4200',
